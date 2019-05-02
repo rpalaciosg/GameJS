@@ -1,4 +1,5 @@
 const SCALE = 20;
+
 //Método auxiliar para crear elementos html dinámicamente
 function createElement(type, className) {
     let element = document.createElement(type);
@@ -13,6 +14,7 @@ function DOMDisplay(parent, level) {
     this.level = level;
 
     this.wrap.appendChild(this.drawBackground());
+    this.wrap.appendChild(this.drawActors());
 
 }
 
@@ -29,4 +31,17 @@ DOMDisplay.prototype.drawBackground = function () {
         });
     });
     return table;
+}
+
+DOMDisplay.prototype.drawActors = function () {
+    let actorsWrap = createElement('div');
+    this.level.actors.map(actor => {
+        let actorElement = createElement('div', `actor ${actor.type}`);
+       let rect = actorsWrap.appendChild(actorElement);
+       rect.style.width = actor.size.x * SCALE + 'px'; 
+       rect.style.height = actor.size.y * SCALE + 'px';
+       rect.style.left = actor.position.x * SCALE + 'px';
+       rect.style.top = actor.position.y * SCALE + 'px';
+    });
+    return actorsWrap;
 }
