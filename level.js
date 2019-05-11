@@ -1,5 +1,6 @@
 const ACTORS = {
-    'o': Coin
+    'o': Coin,
+    '@': Player
 };
 
 function Level(plan) {
@@ -19,7 +20,7 @@ function Level(plan) {
             let characterType = null;
 
             //esta variable hace referencia a construnctores dentro den diccionario ACTORS.
-            let Actor = ACTORS[character];
+            let Actor = ACTORS[character];            
             if (Actor) this.actors.push(new Actor(new Vector(x,y), character));
             if (character === 'x') characterType = 'wall';
             else if (character === '!') characterType = 'lava';
@@ -28,6 +29,7 @@ function Level(plan) {
         }
         this.grid.push(gridLine);
     }
+    console.log(this.actors);
 }
 
 Level.prototype.isFinished = function () {
