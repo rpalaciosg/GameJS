@@ -10,4 +10,4 @@ function Lava (initialPosition, characterType) {
     }
 }
 
-Lava.prototype.type = 'lava';
+Lava.prototype.type = 'lava'; 
