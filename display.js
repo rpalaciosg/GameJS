@@ -3,7 +3,6 @@ const SCALE = 20;
 //Método auxiliar para crear elementos html dinámicamente
 function createElement(type, className) {
     let element = document.createElement(type);
-    //className <> null
     if (className) element.className = className;
     return element;
 }
@@ -14,7 +13,8 @@ function DOMDisplay(parent, level) {
     this.level = level;
 
     this.wrap.appendChild(this.drawBackground());
-    this.wrap.appendChild(this.drawActors());
+    this.actorsLayer = null;
+    this.drawFrame();
 
 }
 
@@ -45,4 +45,17 @@ DOMDisplay.prototype.drawActors = function () {
        console.log(rect.style.width, rect.style.height);
     });
     return actorsWrap;
+}
+
+/*Las animaciones de un juego se hacen por frames, y este metodo permitirá ir dibujando
+**cada frame por separado
+*/
+DOMDisplay.prototype.drawFrame = function () {
+    if (this.actorsLayer) this.wrap.removeChild(this.actorsLayer);
+    this.actorsLayer =this.wrap.appendChild(this.drawActors());
+    this.wrap.className = 'game' + (this.level.status || '');
+}
+
+DOMDisplay.prototype.clear = function () {
+    this.wrap.parentNode.removeChild(this.wrap);
 }
