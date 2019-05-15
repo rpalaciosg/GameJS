@@ -10,7 +10,8 @@ function trackKeys (keyCodes) {
     function handler (event) {
         if (keyCodes.hasOwnProperty(event.keyCode)){            
             let downPressed = event.type === 'keydown';
-            pressedKeys[keyCodes[event.keyCode]] = downPressed;        
+            pressedKeys[keyCodes[event.keyCode]] = downPressed;     
+            event.preventDefault();   
         }                
     }
     addEventListener('keydown', handler);
