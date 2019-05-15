@@ -35,5 +35,17 @@ function runAnimation (framefunction) {
     requestAnimationFrame(frame);
 }
 
+function runLevel (level, Display, callback) {
+    let display = new Display(document.body, level);
+    runAnimation(function (step) {
+        display.drawFrame();
+        if (level.isFinished()){
+            display.clear();
+            if (callback) callback(level.status);
+            return false;
+        }
+    })
+}
+
 let currentlevel = new Level(GAME_LEVELS);
 let display = new DOMDisplay(document.body, currentlevel);
