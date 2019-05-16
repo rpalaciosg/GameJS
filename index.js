@@ -27,7 +27,7 @@ function runAnimation (framefunction) {
         let stop = false;
         if (lastTime !== null){
             let timeStep = Math.min(time - lastTime, 100) / 1000;
-            stop = frameFunction(timeStep) === false;
+            stop = framefunction(timeStep) === false;
         }
         lastTime = time;
         if (!stop) requestAnimationFrame(frame);
@@ -47,5 +47,12 @@ function runLevel (level, Display, callback) {
     })
 }
 
-let currentlevel = new Level(GAME_LEVELS);
-let display = new DOMDisplay(document.body, currentlevel);
+function runGame (level, Display) {
+    let levelObject = new Level(GAME_LEVELS);
+    runLevel(levelObject, Display, status => {
+        if (status === 'lost') console.log('Has perdido');
+        else console.log('Has ganado !!!');
+    });
+}
+
+runGame(GAME_LEVELS, DOMDisplay);
