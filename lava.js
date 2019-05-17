@@ -11,3 +11,7 @@ function Lava (initialPosition, characterType) {
 }
 
 Lava.prototype.type = 'lava'; 
+
+Lava.prototype.act = function (step) {
+    
+}

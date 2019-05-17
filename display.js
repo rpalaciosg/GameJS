@@ -40,8 +40,7 @@ DOMDisplay.prototype.drawActors = function () {
        rect.style.width = actor.size.x * SCALE + 'px'; 
        rect.style.height = actor.size.y * SCALE + 'px';
        rect.style.left = actor.position.x * SCALE + 'px';
-       rect.style.top = actor.position.y * SCALE + 'px';
-       console.log(rect.style.width, rect.style.height);
+       rect.style.top = actor.position.y * SCALE + 'px';    
     });
     return actorsWrap;
 }
