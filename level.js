@@ -8,6 +8,8 @@ const ACTORS = {
 const MAX_STEP = 0.05;
 
 function Level(plan) {
+    if (!validateLevel(plan)) throw new Error('Yo need a player and a coin.')
+
     this.width = plan[0].length;
     this.height = plan.length;
     this.status = null;
@@ -33,6 +35,8 @@ function Level(plan) {
         }
         this.grid.push(gridLine);
     }
+
+    this.actor = this.actors.filter(actor => actor.type === 'player')[0];
 }
 
 Level.prototype.isFinished = function () {
@@ -47,4 +51,9 @@ Level.prototype.animate = function (step, keys) {
         this.actors.forEach( actor => actor.act(thisStep, this, keys));
         step -= thisStep;
     }
+}
+
+function validateLevel (level) {
+    //Verificamos que exista el jugador
+    return (level.some( row => row.indexOf('@') !== -1) && level.some( row => row.indexOf('o') !== -1));
 }

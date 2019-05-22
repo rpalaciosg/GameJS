@@ -7,5 +7,5 @@ function Player (initialPosition) {
 Player.prototype.type = 'player';
 
 Player.prototype.act = function (step, level, keys) {
-
+    
 }
