@@ -48,7 +48,7 @@ Level.prototype.animate = function (step, keys) {
     //Con este while se controla poco a poco los pasitos de 0.05
     while (step >0) {
         let thisStep = Math.min(step, MAX_STEP);
-        this.actors.forEach( actor => actor.act(thisStep, this, keys));
+        this.actors.forEach(actor => actor.act(thisStep, this, keys));
         step -= thisStep;
     }
 }
@@ -82,6 +82,19 @@ Level.prototype.playerTouched = function (type) {
         if (!remainCoins(this.actors)){
             this.status = 'won';
             this.finishDelay = 2;
+        }
+    }
+}
+
+Level.prototype.actorAt = function (actor) {
+    for (let i=0; i < this.actors.length; i++){
+        let other = this.actors[i];
+        if(actor !== other 
+            && actor.position.x + actor.size.x > other.position.x 
+            && actor.position.x < other.position.x + other.size.x 
+            && actor.position.y + actor.size.y > other.position.y 
+            && actor.position.y < other.position.y + other.size.y) {
+            return other;
         }
     }
 }

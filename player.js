@@ -30,7 +30,7 @@ Player.prototype.moveY = function (step, level, keys) {
     let obstacle = level.obstacleAt(newPosition, this.size);
     if(obstacle) {
         level.playerTouched(obstacle);
-        if (keys.up && this.speed.y > 0) this.speed.y = -jumpSpeed;
+        if (keys.up && this.speed.y > 0) this.speed.y =-jumpSpeed;
         else this.speed.y = 0;
     } else {
         this.position = newPosition;
@@ -40,4 +40,7 @@ Player.prototype.moveY = function (step, level, keys) {
 Player.prototype.act = function (step, level, keys) {
     this.moveX(step, level, keys);
     this.moveY(step, level, keys);
+
+    let otherActor = level.actorAt(this);
+    if(otherActor) console.log(otherActor);
 }

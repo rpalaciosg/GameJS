@@ -56,6 +56,7 @@ function runGame (level, Display) {
         console.log(error);
         return alert(error.message);
     }
+    
     runLevel(levelObject, Display, status => {
         if (status === 'lost') console.log('Has perdido');
         else console.log('Has ganado !!!');
