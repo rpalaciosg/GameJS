@@ -4,8 +4,9 @@ const ACTORS = {
     '=': Lava,
     '|': Lava,
     'v': Lava
-};
+}
 const MAX_STEP = 0.05;
+const gameAudio = new Audio('./sounds/coin.wav');
 
 function Level(plan) {
     if (!validateLevel(plan)) throw new Error('Yo need a player and a coin.')
@@ -59,9 +60,7 @@ Level.prototype.obstacleAt = function (position, size) {
     let yStart = Math.floor(position.y);
     let yEnd = Math.ceil(position.y + size.y) ;    
 
-    if (xStart < 0 || xEnd > this.width || yStart < 0) {
-        return 'wall';
-    }
+    if (xStart < 0 || xEnd > this.width || yStart < 0) return 'wall';
     if (yEnd > this.height) return 'lava';
 
     for (let y = yStart; y < yEnd; y++) {
@@ -77,6 +76,7 @@ Level.prototype.playerTouched = function (type, actor) {
         this.status = 'lost';
         this.finishDelay = 1;
     } else if (type === 'coin') {
+        playAudio();
         this.actors = this.actors.filter(otherActor => otherActor !== actor);
         if (!remainCoins(this.actors)){
             this.status = 'won';
@@ -105,4 +105,10 @@ function validateLevel (level) {
 
 function remainCoins (actors) {
     return actors.some(actor => actor.type === 'coin');
+}
+
+function playAudio() {
+    gameAudio.pause();
+    gameAudio.currentTime = 0;
+    gameAudio.play();
 }
