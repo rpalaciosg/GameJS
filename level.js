@@ -36,11 +36,11 @@ function Level(plan) {
         this.grid.push(gridLine);
     }
 
-    this.actor = this.actors.filter(actor => actor.type === 'player')[0];
+    this.player = this.actors.filter(actor => actor.type === 'player')[0];
 }
 
 Level.prototype.isFinished = function () {
-    return (this.status !== null && this.finisDelay < 0)
+    return (this.status !== null && this.finishDelay < 0)
 }
 
 Level.prototype.animate = function (step, keys) {
@@ -62,18 +62,17 @@ Level.prototype.obstacleAt = function (position, size) {
     if (xStart < 0 || xEnd > this.width || yStart < 0) {
         return 'wall';
     }
-
     if (yEnd > this.height) return 'lava';
 
     for (let y = yStart; y < yEnd; y++) {
-        for (let x = xStart; x < xEnd; x++){
+        for (let x = xStart; x < xEnd; x++) {
             let fieldType = this.grid[y][x];
             if (fieldType) return fieldType;
         }
     }
 }
 
-Level.prototype.playerTouched = function (type) {
+Level.prototype.playerTouched = function (type, actor) {
     if (type === 'lava' & this.status === null) {
         this.status = 'lost';
         this.finishDelay = 1;
@@ -89,7 +88,7 @@ Level.prototype.playerTouched = function (type) {
 Level.prototype.actorAt = function (actor) {
     for (let i=0; i < this.actors.length; i++){
         let other = this.actors[i];
-        if(actor !== other 
+        if (actor !== other 
             && actor.position.x + actor.size.x > other.position.x 
             && actor.position.x < other.position.x + other.size.x 
             && actor.position.y + actor.size.y > other.position.y 
