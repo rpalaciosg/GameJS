@@ -1,6 +1,6 @@
 const SCALE = 20;
 
-//Método auxiliar para crear elementos html dinámicamente
+//Método auxiliar para crear elementos html dinamicamente
 function createElement(type, className) {
     let element = document.createElement(type);
     if (className) element.className = className;
@@ -25,9 +25,7 @@ DOMDisplay.prototype.drawBackground = function () {
         let rowElement = createElement('tr');
         rowElement.style.height = SCALE + 'px';
         table.appendChild(rowElement);   
-        row.forEach( type => {
-            rowElement.appendChild(createElement('td', type));
-        });
+        row.forEach( type => rowElement.appendChild(createElement('td', type)));
     });
     return table;
 }
@@ -51,7 +49,7 @@ DOMDisplay.prototype.moveDisplay = function () {
     let margin = width / 3;
 
     let left = this.wrap.scrollLeft;
-    let rigth = left + width;
+    let right = left + width;
     let top = this.wrap.scrollTop;
     let bottom = top + height;
 
@@ -59,13 +57,13 @@ DOMDisplay.prototype.moveDisplay = function () {
     let playerCenter = player.position.plus(player.size.times(0.5)).times(SCALE);
     
     if (playerCenter.x < left + margin) this.wrap.scrollLeft = playerCenter.x - margin;
-    else if (playerCenter.x > rigth - margin) this.wrap.scrollLeft = playerCenter.x + margin - width;
+    else if (playerCenter.x > right - margin) this.wrap.scrollLeft = playerCenter.x + margin - width;
 
     if (playerCenter.y < top + margin) this.wrap.scrollTop = playerCenter.y - margin;
     else if (playerCenter.y > bottom - margin) this.wrap.scrollTop = playerCenter.y + margin - height;
 }
 
-/*Las animaciones de un juego se hacen por frames, y este metodo permitirá ir dibujando
+/*Las animaciones de un juego se hacen por frames, y este método permitirá ir dibujando
 **cada frame por separado
 */
 DOMDisplay.prototype.drawFrame = function () {

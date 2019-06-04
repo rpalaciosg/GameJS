@@ -26,7 +26,7 @@ function Level(plan) {
             let character = line[x]; 
             let characterType = null;
 
-            //esta variable hace referencia a construnctores dentro de diccionario ACTORS.
+            //esta variable hace referencia a constructores dentro de diccionario ACTORS.
             let Actor = ACTORS[character];            
             if (Actor) this.actors.push(new Actor(new Vector(x,y), character));
             if (character === 'x') characterType = 'wall';
