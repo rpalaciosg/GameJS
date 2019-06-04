@@ -69,7 +69,7 @@ DOMDisplay.prototype.moveDisplay = function () {
 DOMDisplay.prototype.drawFrame = function () {
     if (this.actorsLayer) this.wrap.removeChild(this.actorsLayer);
     this.actorsLayer = this.wrap.appendChild(this.drawActors());
-    this.wrap.className = 'game' + (this.level.status || '');
+    this.wrap.className = 'game ' + (this.level.status || '');
     this.moveDisplay();
 }
 
